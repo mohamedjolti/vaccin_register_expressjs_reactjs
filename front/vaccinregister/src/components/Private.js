@@ -4,7 +4,6 @@ import { Login } from "./Login";
 
 export const PrivateComponent = ({ children }) => {
     const { isLogged } = useContext(GlobalContext);
-    console.log("private component",isLogged);
     if (isLogged) {
         return (
         <>

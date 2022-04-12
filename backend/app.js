@@ -1,6 +1,7 @@
 const bodyParser = require("body-parser");
 const { PORT } = require("./CONFIG");
 const clientRoutes = require("./routes/clientRoutes");
+const vaccinRoutes = require("./routes/vaccinRoutes");
 var cors = require('cors')
 
 //init the app
@@ -24,6 +25,7 @@ app.use(function(req, res, next) {
   });
 //using routes
 app.use("/api/client", clientRoutes);
+app.use("/api/vaccin",vaccinRoutes);
 
 app.use(cors);
 

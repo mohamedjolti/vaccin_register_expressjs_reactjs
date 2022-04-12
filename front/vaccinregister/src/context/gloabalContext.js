@@ -7,12 +7,12 @@ import { initialState } from "./initialState";
 export const GlobalContext = createContext(initialState);
 
 
-export const GlobalProvider =  ({ children }) => {
+export const GlobalProvider = ({ children }) => {
     const [state, dispatch] = useReducer(AuthReducer, initialState)
-    const loginAction =async (email, password) => {
+    const loginAction = async (email, password) => {
 
         let requestBody = { email, password };
-     await   fetch("http://localhost:7000/api/client/login", {
+        await fetch("http://localhost:7000/api/client/login", {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -20,14 +20,21 @@ export const GlobalProvider =  ({ children }) => {
             body: JSON.stringify(requestBody)
         }).then(res => res.json())
             .then(data => {
+                localStorage.setItem("isLogged", data.status);
+                localStorage.setItem("token",data.token);
                 dispatch({
                     type: LOGIN,
-                    payload: data.status
+                    payload: data
                 })
 
             }).catch(error => console.log(error));
     }
-    return <GlobalContext.Provider value={{ loginAction, isLogged: state.isLogged }}>
+    return <GlobalContext.Provider value={{ 
+        loginAction,
+         isLogged: state.isLogged ,
+         message:state.message  ,
+         token: state.token
+         }}>
         {children}
     </GlobalContext.Provider>
 }

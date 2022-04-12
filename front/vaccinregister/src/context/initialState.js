@@ -1,3 +1,5 @@
 export  const initialState={
-    isLogged:false
+    isLogged:localStorage.getItem("isLogged")  ? localStorage.getItem("isLogged") : false,
+    message:"",
+    token:localStorage.getItem("token")
 }

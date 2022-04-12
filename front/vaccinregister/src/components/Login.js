@@ -3,11 +3,14 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useContext, useState } from 'react';
 import { GlobalContext } from '../context/gloabalContext';
+import Alert from '@mui/material/Alert';
+
 export const Login = () => {
-    let {loginAction,isLogged}=useContext(GlobalContext);
+    let { loginAction, message } = useContext(GlobalContext);
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
-
+    let alert = message ? <Alert severity="error">{message}</Alert> : (<></>);
+    
     let changeValue = (e) => {
         const { id, value } = e.target;
         switch (id) {
@@ -20,7 +23,7 @@ export const Login = () => {
         }
     }
     let login = () => {
-        loginAction(email,password);
+        loginAction(email, password);
     }
 
     return <Box
@@ -31,8 +34,10 @@ export const Login = () => {
         noValidate
         autoComplete="off"
     >
+        {alert}
         <TextField onChange={changeValue} id="email" label="Email" variant="outlined" />
         <TextField onChange={changeValue} id="password" label="Password" variant="filled" />
         <Button onClick={login}>Sign IN</Button>
+
     </Box>
 }

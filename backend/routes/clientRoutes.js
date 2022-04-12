@@ -2,7 +2,7 @@ const clientModel = require("../models/Client");
 const { hashString, compareTwoHashedStrings } = require("../services/stringService");
 const router = require("express").Router();
 const jwt = require("jsonwebtoken")
-
+const verifyToken=require("./virifyToken");
 
 router.post("/register", async (req, res) => {
     const { name, email, password } = req.body;
@@ -39,7 +39,7 @@ router.post("/login", async (req, res) => {
 
 })
 
-router.get("/", (req, res) => {
+router.get("/",verifyToken, (req, res) => {
     clientModel.find({}, (err, clients) => {
         if (err) console.log(err)
         console.log(clients);

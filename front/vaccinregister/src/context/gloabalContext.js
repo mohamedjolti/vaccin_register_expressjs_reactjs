@@ -1,4 +1,5 @@
 import { createContext, useReducer } from "react"
+import { API_URL } from "../config";
 import { LOGIN } from "./actionTypes";
 import { AuthReducer } from "./AuthRedcuer";
 import { initialState } from "./initialState";
@@ -12,7 +13,7 @@ export const GlobalProvider = ({ children }) => {
     const loginAction = async (email, password) => {
 
         let requestBody = { email, password };
-        await fetch("http://localhost:7000/api/client/login", {
+        await fetch(API_URL+"api/client/login", {
             headers: {
                 'Content-Type': 'application/json'
             },

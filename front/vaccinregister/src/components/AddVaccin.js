@@ -30,7 +30,7 @@ export default function AddVaccin() {
   return (
     <div>
       <Button id="openFormButton" variant="outlined" onClick={handleClickOpen}>
-        Open form dialog
+        add new vaccin Session
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Subscribe</DialogTitle>

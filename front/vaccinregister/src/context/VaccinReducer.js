@@ -1,4 +1,4 @@
-import { ADD_VACCIN, GET_VACCINS } from "./actionTypes";
+import { ADD_VACCIN, GET_VACCINS, UPDATE_VACCIN } from "./actionTypes";
 
 export const vaccinReducer=(state,action)=>{
     switch(action.type){
@@ -11,6 +11,14 @@ export const vaccinReducer=(state,action)=>{
         case ADD_VACCIN :
             action.payload.id=action.payload._id;
             return {...state, vaccins:[...state.vaccins,action.payload]}
+        case UPDATE_VACCIN:
+           let updatedVaccins= state.vaccins.map(vaccin=>{
+                if(vaccin._id== action.payload._id){
+                    action.payload.id=action.payload._id;
+                    return action.payload;
+                }
+            });
+            return {...state,vaccins:updatedVaccins}
         default:
             return state;
     }

@@ -52,9 +52,36 @@ export const VaccinProivder = ({ children }) => {
                 })
             })
     }
+
+     /**
+     * 
+     * @param {{
+      * date:Date,
+      * hospital:string,
+      * _id:number
+      * }} newVaccin 
+      */
+    const updateVaccin= (editedVaccin)=>{
+        fetch(API_URL + "api/vaccin", {
+            headers: {
+                "token": token,
+                "Content-Type":"application/json"
+            },
+            method:"PUT",
+            body:JSON.stringify(editedVaccin) 
+        }
+        ).then(response=>response.json())
+            .then(jsonResult => {
+                dispatch({
+                    type: updateVaccin,
+                    payload: jsonResult.data
+                })
+            })
+    }
     return <VaccinContext.Provider value={{
         fetchVaccins,
         addVaccin,
+        updateVaccin,
         vaccins: state.vaccins
     }}>
         {children}

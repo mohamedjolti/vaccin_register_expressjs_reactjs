@@ -36,8 +36,7 @@ export default function AddVaccin() {
         <DialogTitle>Subscribe</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To subscribe to this website, please enter your email address here. We
-            will send updates occasionally.
+            add new vaccin session here by filling the date of the session and the hospital where the operation is done
           </DialogContentText>
           <TextField
             autoFocus

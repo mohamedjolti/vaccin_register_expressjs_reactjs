@@ -4,29 +4,40 @@ import { useState, useEffect, useContext } from 'react';
 import { VaccinContext } from '../context/vaccinContext';
 import AddVaccin from './AddVaccin';
 import { UPDATE_VACCIN } from '../context/actionTypes';
-const columns = [
-    { field: 'id', headerName: 'ID', width: 90 },
-    {
-        field: 'hospital',
-        headerName: 'Hosptial',
-        width: 500,
-        editable: true,
-    },
-    {
-        field: 'date',
-        headerName: 'date',
-        width: 500,
-        editable: true,
-    },
-
-];
+import { Button } from '@mui/material';
 
 
 
 
 export function Home() {
     const [rows, setRows] = useState([]);
-    const { fetchVaccins, vaccins, updateVaccin } = useContext(VaccinContext);
+    const { fetchVaccins, vaccins, updateVaccin , deleteVaccin} = useContext(VaccinContext);
+    const columns = [
+        { field: 'id', headerName: 'ID', width: 90 },
+        {
+            field: 'hospital',
+            headerName: 'Hosptial',
+            width: 500,
+            editable: true,
+        },
+        {
+            field: 'date',
+            headerName: 'date',
+            width: 500,
+            editable: true,
+        },
+        {
+            field: 'delete',
+            headerName: 'delete',
+            width: 500,
+            editable: false,
+            renderCell:(params)=>{
+                return  (  <Button onClick={()=>deleteVaccin(params.row._id)}>remove</Button> )
+            }
+        },
+    ];
+    
+
     useEffect(() => {
         fetchVaccins();
         console.log("emit effect", rows);

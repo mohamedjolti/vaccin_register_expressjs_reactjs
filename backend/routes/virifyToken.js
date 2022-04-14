@@ -8,6 +8,7 @@ module.exports=function (req,res,next){
        const virified=jwt.verify(token,"tokensecret");
        req.user=virified
        next()
+       
     }catch(err){
       res.status("404").send({status:false,message:"token dined"}) 
 

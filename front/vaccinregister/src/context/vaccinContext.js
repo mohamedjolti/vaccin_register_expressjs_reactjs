@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer } from "react"
 import { API_URL } from "../config";
-import { ADD_VACCIN, GET_VACCINS } from "./actionTypes";
+import { ADD_VACCIN, DELETE_VACCIN, GET_VACCINS, UPDATE_VACCIN } from "./actionTypes";
 import { GlobalContext } from "./gloabalContext";
 import { vaccinReducer } from "./VaccinReducer";
 
@@ -73,7 +73,24 @@ export const VaccinProivder = ({ children }) => {
         ).then(response=>response.json())
             .then(jsonResult => {
                 dispatch({
-                    type: updateVaccin,
+                    type: UPDATE_VACCIN,
+                    payload: jsonResult.data
+                })
+            })
+    }
+    const deleteVaccin=(id)=>{
+        fetch(API_URL + "api/vaccin", {
+            headers: {
+                "token": token,
+                "Content-Type":"application/json"
+            },
+            method:"DELETE",
+            body:JSON.stringify({_id:id}) 
+        }
+        ).then(response=>response.json())
+            .then(jsonResult => {
+                dispatch({
+                    type: DELETE_VACCIN,
                     payload: jsonResult.data
                 })
             })
@@ -82,6 +99,7 @@ export const VaccinProivder = ({ children }) => {
         fetchVaccins,
         addVaccin,
         updateVaccin,
+        deleteVaccin,
         vaccins: state.vaccins
     }}>
         {children}

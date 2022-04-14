@@ -1,4 +1,4 @@
-import { ADD_VACCIN, GET_VACCINS, UPDATE_VACCIN } from "./actionTypes";
+import { ADD_VACCIN, DELETE_VACCIN, GET_VACCINS, UPDATE_VACCIN } from "./actionTypes";
 
 export const vaccinReducer=(state,action)=>{
     switch(action.type){
@@ -19,6 +19,11 @@ export const vaccinReducer=(state,action)=>{
                 }
             });
             return {...state,vaccins:updatedVaccins}
+        case DELETE_VACCIN:
+            
+            return {...state ,
+            vaccins:state.vaccins.filter(vaccin=>vaccin._id!==action.payload._id)
+            }
         default:
             return state;
     }

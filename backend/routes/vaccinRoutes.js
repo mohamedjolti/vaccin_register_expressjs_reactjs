@@ -30,7 +30,7 @@ router.put("/",virifyToken,(req,res)=>{
 
         let { date, hospital ,_id} = req.body;
         //updating vaccin
-        Vaccin.findByIdAndUpdate({_id} ,{ date, hospital }, 
+        Vaccin.findByIdAndUpdate({_id} ,{ date, hospital },{new:true}, 
             (err, updatedVaccin) => {
             if (err) res.send({ status: false, message: err })
             else
@@ -40,7 +40,7 @@ router.put("/",virifyToken,(req,res)=>{
 
 router.delete("/",virifyToken,(req,res)=>{
        
-        //creating new vaccin
+        //deleting vaccin
         Vaccin.findByIdAndDelete({_id:req.body._id}, 
             (err, deletedVaccin) => {
             if (err) res.send({ status: false, message: err })

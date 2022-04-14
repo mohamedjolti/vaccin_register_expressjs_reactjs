@@ -16,8 +16,11 @@ export const vaccinReducer=(state,action)=>{
                 if(vaccin._id== action.payload._id){
                     action.payload.id=action.payload._id;
                     return action.payload;
+                }else{
+                    return vaccin;
                 }
             });
+            console.log(updatedVaccins);
             return {...state,vaccins:updatedVaccins}
         case DELETE_VACCIN:
             

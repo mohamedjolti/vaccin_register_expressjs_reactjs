@@ -8,6 +8,9 @@ export const vaccinReducer=(state,action)=>{
             });
             console.log(action.payload);
             return {...state,vaccins:action.payload}  
+        case ADD_VACCIN :
+            action.payload.id=action.payload._id;
+            return {...state, vaccins:[...state.vaccins,action.payload]}
         default:
             return state;
     }
